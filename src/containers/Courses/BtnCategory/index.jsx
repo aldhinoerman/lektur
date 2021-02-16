@@ -5,12 +5,14 @@ import '../../../components/style/App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    GET_COURSES_SUCCESS
+    GET_COURSES_SUCCESS,
+    GET_COURSES_INDEX_SUCCESS
 } from '../../../store/actions/types';
 
 const Category = ({
-    course: { loading, courses },
-    getCourses
+    course: { loading, courses, coursesIndex },
+    getCourses,
+    getCoursesByIndex
 }) => {
 
     useEffect(() => {
@@ -19,7 +21,6 @@ const Category = ({
 
     const handleSubmit = category => e => {
         e.preventDefault();
-        window.location.href = `/SearchByButton/${category}`
     };
 
     return (
@@ -31,7 +32,7 @@ const Category = ({
                         <Col>
                             {loading ? <Spinner animation="grow" /> : courses && courses.filter((ele, ind) => ind === courses.findIndex(elem => elem.category === ele.category)).map((v, index) => (
                                 <div key={index}>
-                                    <Button onClick={handleSubmit(v.category)} variant="outline-warning">{v.category}</Button>
+                                    <Button onChange={handleSubmit(v.category)} variant="outline-warning">{v.category}</Button>
                                 </div>
                             ))}
                         </Col>
@@ -45,7 +46,8 @@ const Category = ({
 Category.propTypes = {
     loading: PropTypes.bool,
     courses: PropTypes.array,
-    getCourses: PropTypes.func.isRequired
+    getCourses: PropTypes.func.isRequired,
+    getCoursesByIndex: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -54,7 +56,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getCourses: () => dispatch({ type: GET_COURSES_SUCCESS })
+    getCourses: () => dispatch({ type: GET_COURSES_SUCCESS }),
+    getCoursesByIndex: () => dispatch({ type: GET_COURSES_INDEX_SUCCESS })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)

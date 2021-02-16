@@ -13,10 +13,17 @@ export const getAllCourses = async () => {
     }
 }
 
-export const getCoursesCategory = async (category) => {
+export const getCoursesIndex = async (category, keyword) => {
+    let url = `courses/all`
+    if(category) {
+        url = `courses/find/byCategory?key=${category}`
+    }
+    if(keyword) {
+        url = `courses/find/byTitle?key=${keyword}`
+    }
     try {
-        const coursesCategory = await axios.get(`courses/find/byCategory?key=${category}`)
-        return coursesCategory.data.data
+        const coursesIndex = await axios.get(url)
+        return coursesIndex.data.data
     } catch (err) {
         return console.error(err)
     }

@@ -8,13 +8,13 @@ import {
     SET_LOADING,
     GET_COURSES,
     GET_COURSES_SUCCESS,
-    GET_COURSES_BY_CATEGORY,
-    GET_COURSES_BY_CATEGORY_SUCCESS
+    GET_COURSES_INDEX,
+    GET_COURSES_INDEX_SUCCESS
 } from '../actions/types';
 
 import {
     getAllCourses,
-    getCoursesCategory
+    getCoursesIndex
 } from '../api/all-api';
 
 function* getCourses() {
@@ -25,15 +25,15 @@ function* getCourses() {
     yield put({ type: GET_COURSES, payload: courses })
 }
 
-function* getCoursesByCategory() {
+function* getCoursesByIndex() {
     yield put({ type: SET_LOADING })
 
-    const coursesByCategory = yield call(getCoursesCategory)
+    const coursesIndex = yield call(getCoursesIndex)
 
-    yield put({ type: GET_COURSES_BY_CATEGORY, payload: coursesByCategory })
+    yield put({ type: GET_COURSES_INDEX, payload: coursesIndex })
 }
 
 export default function* allSaga() {
     yield takeLatest(GET_COURSES_SUCCESS, getCourses)
-    yield takeLatest(GET_COURSES_BY_CATEGORY_SUCCESS, getCoursesByCategory)
+    yield takeLatest(GET_COURSES_INDEX_SUCCESS, getCoursesByIndex)
 }

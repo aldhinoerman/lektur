@@ -9,7 +9,6 @@ import Home from './containers/Home';
 import Login from './containers/Auth/Login';
 import SignUp from './containers/Auth/SignUp';
 import SignUpTeacher from './containers/Auth/SignUp/Teacher';
-import SearchByButton from './containers/Courses/SearchResult/SearchByButton';
 
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
           <Route path='/Login' component={Login} />
           <Route path='/Signup' component={SignUp} />
           <Route path='/SignTeacher' component={SignUpTeacher} />
-          <Route path='/SearchByButton/:category' component={SearchByButton} />
         </Switch>
       </BrowserRouter>
     </Provider>
